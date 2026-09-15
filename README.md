@@ -139,6 +139,12 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
+Установка зависимостей 
+
+```
+python -m pip install -r requirements.txt
+```
+
 
 ## ▶️ Запуск тестов
 
