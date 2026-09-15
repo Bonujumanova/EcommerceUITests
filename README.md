@@ -69,7 +69,7 @@ POM позволяет отделить логику взаимодействи�
 ### Структура проекта
 
 ```text
-StepikQA/
+EcommerceUITests/
 │
 ├── base/                   # Базовые методы для работы с UI
 │
@@ -151,8 +151,8 @@ screen/
 Клонировать репозиторий:
 
 ```bash
-git clone https://github.com/Bonujumanova/StepikQA.git
-cd StepikQA
+git clone https://github.com/Bonujumanova/EcommerceUITests.git
+cd EcommerceUITests
 ```
 
 Создать виртуальное окружение:
