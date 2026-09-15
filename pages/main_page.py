@@ -7,8 +7,6 @@ from selenium.webdriver.support import expected_conditions as ec
 from base.base_class import Base
 
 
-
-
 class MainPage(Base):
     url = "https://www.sima-land.ru/"
 
@@ -19,7 +17,6 @@ class MainPage(Base):
     CATALOG_BAR: str = "//button[@data-testid='main-bar:catalog-opener']"
     YES_BUTTON_IN_LOCATION_NOTIFICATION: str = "//button[@class='UbyyAc mnRNop UxJB_f theme-light cGKvDZ']"
     PRODUCT_CATEGORIES: str = "//a[@data-testid='catalog-menu:root-category-link']"
-
 
     def get_main_catalog_bar(self) -> WebElement:
         return WebDriverWait(self.driver, 10).until(
@@ -36,7 +33,6 @@ class MainPage(Base):
         return WebDriverWait(self.driver, 10).until(
             ec.element_to_be_clickable(product_category))
 
-
     def click_main_catalog_bar(self) -> None:
         self.get_main_catalog_bar().click()
         print("Click CATALOG BAR")
@@ -48,7 +44,6 @@ class MainPage(Base):
     def click_product_category(self) -> None:
         self.get_product_category().click()
         print("Click PRODUCT CATEGORY")
-
 
     def select_main_catalog_bar(self) -> None:
         self.driver.get(self.url)

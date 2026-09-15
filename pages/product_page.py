@@ -16,51 +16,41 @@ class ProductPage(Base):
     GO_TO_CART_BUTTON: str = "//div[@class='VAowBn']"
     PRODUCT_NAME: str = "//h1[@data-testid='product-name']"
 
-
     def get_add_to_cart_button(self) -> WebElement:
         return WebDriverWait(self.driver, 10).until(
             ec.element_to_be_clickable((By.XPATH, self.ADD_TO_CART_BUTTON)))
 
     def get_costume_size_parameter(self) -> WebElement:
         selected_costume_size_index: int = 0
-        costume_size_parameter = self.driver.find_elements(By.XPATH, self.COSTUME_SIZE_PARAMETER)[selected_costume_size_index]
+        costume_size_parameter = self.driver.find_elements(By.XPATH, self.COSTUME_SIZE_PARAMETER)[
+            selected_costume_size_index]
         return WebDriverWait(self.driver, 10).until(
             ec.element_to_be_clickable(costume_size_parameter))
 
     def get_go_to_cart_button(self) -> WebElement:
         return WebDriverWait(self.driver, 10).until(
-            ec.element_to_be_clickable((By.XPATH,self.GO_TO_CART_BUTTON)))
+            ec.element_to_be_clickable((By.XPATH, self.GO_TO_CART_BUTTON)))
 
     def get_product_name(self) -> str:
-        time.sleep(10)
         product_name = self.driver.find_element(By.XPATH, self.PRODUCT_NAME).text
-        print(f"PRODUCT NAME: {product_name}")
         return product_name
-
 
     def click_add_to_cart_button(self) -> None:
         self.get_add_to_cart_button().click()
-        print("Click 'Добавить в корзину' button")
 
     def click_costume_size_parameter(self) -> None:
         self.get_costume_size_parameter().click()
-        print("Click 'рост 104-110см'")
 
     def click_go_to_cart_button(self) -> None:
         self.get_go_to_cart_button().click()
         print("Click CART button")
 
-
     def select_costume_size_parameter(self) -> None:
         self.get_current_url()
-        time.sleep(1)
         self.click_costume_size_parameter()
-        time.sleep(3)
 
     def select_add_to_cart(self) -> None:
         self.click_add_to_cart_button()
-        time.sleep(3)
 
     def select_go_to_cart_button(self) -> None:
         self.click_go_to_cart_button()
-        time.sleep(3)

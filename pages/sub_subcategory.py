@@ -18,13 +18,9 @@ class SubSubcategoryPage(Base):
         return WebDriverWait(self.driver, 10).until(
             ec.element_to_be_clickable(sub_subcategory_theme))
 
-
     def click_sub_subcategory_theme(self):
         self.get_sub_subcategory_theme().click()
-        print(f"Click 'Карнавальные костюмы'")
-
 
     def select_show_more(self):
         self.get_current_url()
         self.click_sub_subcategory_theme()
-        time.sleep(3)

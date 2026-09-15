@@ -5,7 +5,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from base.base_class import Base
-from pages.product_page import ProductPage
 
 
 class CartPage(Base):
@@ -17,7 +16,6 @@ class CartPage(Base):
     CHECKOUT_BUTTON: str = "//button[@data-testid='checkout-button']"
     PRODUCT_NAME: str = "//a[@class='RSMgR3 wkpN3d ZwXSmF']"
 
-
     def get_checkout_button(self) -> WebElement:
         return WebDriverWait(self.driver, 10).until(
             ec.element_to_be_clickable((By.XPATH, self.CHECKOUT_BUTTON)))
@@ -26,15 +24,10 @@ class CartPage(Base):
         time.sleep(10)
         product_name = self.driver.find_element(By.XPATH, self.PRODUCT_NAME)
         result = product_name.text
-        print(f"Cart Product name: {result}")
         return result
-
 
     def click_checkout_button(self) -> None:
         self.get_checkout_button().click()
-        print("Click CHECKOUT button")
-
-
 
     def select_checkout_button(self) -> None:
         self.get_current_url()
@@ -42,4 +35,3 @@ class CartPage(Base):
         self.get_screenshot()
         self.click_checkout_button()
         time.sleep(3)
-

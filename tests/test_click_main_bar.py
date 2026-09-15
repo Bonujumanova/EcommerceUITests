@@ -10,10 +10,8 @@ from pages.subcategory_page import SubcategoryPage
 
 
 def test_click_main_bar(set_up, set_group):
-
     driver = webdriver.Firefox()
     driver.maximize_window()
-    print("Start TEST #1")
 
     main_page = MainPage(driver)
     main_page.select_main_catalog_bar()
@@ -30,21 +28,17 @@ def test_click_main_bar(set_up, set_group):
     sub_sub_subcategory_page.select_checkbox_button()
     sub_sub_subcategory_page.select_witch_carnival_costume()
 
-
     product_page = ProductPage(driver)
     product_page.select_costume_size_parameter()
     product_page.select_add_to_cart()
     product_name = product_page.get_product_name()
     product_page.select_go_to_cart_button()
 
-
     cart_page = CartPage(driver)
     cart_product_name = cart_page.get_cart_product_name()
     try:
         assert product_name == cart_product_name
-        print("Check product - OK")
     except AssertionError as e:
-        print(f"Check product: {e}")
         driver.quit()
     cart_page.select_checkout_button()
 
@@ -53,11 +47,9 @@ def test_click_main_bar(set_up, set_group):
 
     client_info_page.select_delivery_by_courier_button()
 
-
     delivery_address_info_page = DeliveryAddressPage(driver)
     delivery_address_info_page.select_address_box()
     delivery_address_info_page.select_confirm_address_button()
 
     client_info_page.get_screenshot()
 
-    print("FINISH TEST #1 SUCCESS!")

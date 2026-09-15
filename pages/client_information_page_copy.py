@@ -4,8 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from base.base_class import Base
 from faker import Faker
-from pages.cart_page import CartPage
-from pages.product_page import ProductPage
+
 
 
 class ClientInformationPageCopy(Base):
@@ -25,25 +24,17 @@ class ClientInformationPageCopy(Base):
     client_info_list: list[str,] = [faker_.name(), faker_.phone_number(), faker_.email()]
     client_name = client_info_list[0]
 
-
-
     def get_delivery_by_courier_button(self) -> WebElement:
         delivery_cy_courier_btn = self.driver.find_element(By.XPATH, self.DELIVERY_BY_COURIER_BUTTON)
         return delivery_cy_courier_btn
-
 
     def get_client_info(self, field_index: int) -> WebElement:
         field_element = self.driver.find_elements(By.XPATH, self.CLIENT_INFO_FIELD)[field_index]
         return field_element
 
-
     def click_delivery_by_courier_button(self) -> None:
         self.get_delivery_by_courier_button().click()
-        print("Click 'Доставка курьером'")
 
-
-
-    #TODO
     # WebdriverWait to_be_clickable - не работает на этой странице, ошибка 'selenium.common.exceptions.TimeoutException'
     # upd. 1. пришлось использовать явное ожидание implicitly_wait(10).
     # upd. 2 Но!!! ПОЛЯ не заполняются, ошибок нет. Приходится использовать time.sleep(10)
@@ -57,7 +48,6 @@ class ClientInformationPageCopy(Base):
             time.sleep(10)
             self.get_client_info(index).send_keys(text)
             print(f"Send '{info_text[index]}: {text}' INFO")
-
 
     def select_delivery_by_courier_button(self) -> None:
         self.get_current_url()

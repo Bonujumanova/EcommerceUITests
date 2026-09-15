@@ -25,21 +25,15 @@ class SubcategoryPage(Base):
         return WebDriverWait(self.driver, 10).until(
             ec.element_to_be_clickable(subcategory_name))
 
-
     def click_show_more_button(self) -> None:
         self.get_show_more_button().click()
-        print("Click 'Показать ещё...' button")
 
     def click_subcategory_name(self) -> None:
         self.get_subcategory().click()
-        print("Click Selected subcategory")
 
-
-    def select_show_more(self) -> None :
+    def select_show_more(self) -> None:
         self.get_current_url()
         self.click_show_more_button()
-        time.sleep(3)
 
     def select_subcategory(self) -> None:
         self.click_subcategory_name()
-        time.sleep(3)
