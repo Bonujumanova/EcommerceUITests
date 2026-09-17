@@ -1,4 +1,3 @@
-import time
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
@@ -9,14 +8,15 @@ class SubSubcategoryPage(Base):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-
-    SUB_SUBCATEGORY_THEME: str = "//span[@class='Xj5pxy']"
+    # Карнавальные костюмы
+    SUB_SUBCATEGORY_THEME: str = \
+        "//a[@data-testid='subcategory-link' and contains(., 'Карнавальные костюмы')]"
 
     def get_sub_subcategory_theme(self):
-        carnival_costumes_index: int = 6
-        sub_subcategory_theme = self.driver.find_elements(By.XPATH, self.SUB_SUBCATEGORY_THEME)[carnival_costumes_index]
+
         return WebDriverWait(self.driver, 10).until(
-            ec.element_to_be_clickable(sub_subcategory_theme))
+            ec.element_to_be_clickable((By.XPATH, SubSubcategoryPage.SUB_SUBCATEGORY_THEME))
+        )
 
     def click_sub_subcategory_theme(self):
         self.get_sub_subcategory_theme().click()

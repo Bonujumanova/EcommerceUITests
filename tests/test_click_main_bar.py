@@ -9,7 +9,7 @@ from pages.sub_subsubcategory import SubSubSubcategoryPage
 from pages.subcategory_page import SubcategoryPage
 
 
-def test_click_main_bar(set_up, set_group):
+def test_click_main_bar(setup_test, set_group_test):
     driver = webdriver.Firefox()
     driver.maximize_window()
 
@@ -17,7 +17,7 @@ def test_click_main_bar(set_up, set_group):
     main_page.select_main_catalog_bar()
 
     subcategory_page = SubcategoryPage(driver)
-    subcategory_page.select_show_more()
+    # subcategory_page.select_show_more()
     subcategory_page.select_subcategory()
 
     sub_subcategory_page = SubSubcategoryPage(driver)
@@ -29,7 +29,6 @@ def test_click_main_bar(set_up, set_group):
     sub_sub_subcategory_page.select_witch_carnival_costume()
 
     product_page = ProductPage(driver)
-    product_page.select_costume_size_parameter()
     product_page.select_add_to_cart()
     product_name = product_page.get_product_name()
     product_page.select_go_to_cart_button()
@@ -43,6 +42,7 @@ def test_click_main_bar(set_up, set_group):
     cart_page.select_checkout_button()
 
     client_info_page = ClientInformationPageCopy(driver)
+    client_info_page.select_customer_type_toggle()
     client_info_page.select_client_info_fields()
 
     client_info_page.select_delivery_by_courier_button()

@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -24,7 +22,7 @@ class DeliveryAddressPage(Base):
     ADDRESS_BOX: str = "//textarea[@data-testid='base-input:field']"
     CLIENT_INFO_FIELD: str = "//div[@data-testid='input']"
     CONFIRM_ADDRESS_BUTTON: str = "//button[@data-testid='button']"
-    CONFIRM_WITH_MANAGER_BUTTON: str = "//div[@class='D5FCL_']"
+    CONFIRM_WITH_MANAGER_BUTTON: str = "//button[@data-testid='button' and contains(., 'Продолжить с менеджером')]"
 
     def get_address_box(self) -> WebElement:
         return WebDriverWait(self.driver, 10).until(
@@ -54,7 +52,6 @@ class DeliveryAddressPage(Base):
         info = ["apartment", "doorphone", "entrance", "floor"]
         for index, i in enumerate(range(3, 7)):
             self.get_float_field(i).send_keys("1")
-            time.sleep(2)
 
     def click_confirm_address_button(self) -> None:
         self.get_confirm_address_with_manager_button().click()
@@ -62,10 +59,7 @@ class DeliveryAddressPage(Base):
 
     def select_address_box(self) -> None:
         self.get_current_url()
-        time.sleep(1)
         self.send_address_box()
-        time.sleep(3)
 
     def select_confirm_address_button(self) -> None:
         self.click_confirm_address_button()
-        time.sleep(3)

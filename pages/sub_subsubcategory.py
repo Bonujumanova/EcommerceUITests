@@ -1,4 +1,3 @@
-import time
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -12,22 +11,24 @@ class SubSubSubcategoryPage(Base):
         super().__init__(driver)
         self.driver = driver
 
-    SHOW_MORE_BUTTON: str = "//a[@class='WFe7Sg hzy0vv hUkBdJ']"
+    # Вид товара(кнопка "еще ..."
+    SHOW_MORE_BUTTON: str = \
+        "div.Ywl6gJ:nth-child(9) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > a:nth-child(1)"
+    # Вид товара - "Костюм"
     PRODUCT_SUBJECT_CHECKBOX: str = "//input[@type='checkbox']"
-    CHECKBOX = "/html/body/main/div/div[3]/div[1]/div[1]/div/div[1]/div[7]/div[2]/div/div[1]/label[1]/span[1]/input"
-    WITCH_CARNIVAL_COSTUME: str = "//span[contains(text(), 'Карнавальный костюм «Зловещая Колдунья»: платье, шляпа, сумка, чулки, рост 110-116 см')]"
+    CHECKBOX = ".cBROg0 > label:nth-child(1) > span:nth-child(2) > a:nth-child(1)"
+    PUMPKIN_COSTUME: str = "//span[contains(text(), 'Карнавальный костюм «Осенняя тыква», фетр')]"
 
     def get_show_more_button(self) -> WebElement:
-        show_more_button = self.driver.find_elements(By.XPATH, self.SHOW_MORE_BUTTON)[1]
         return WebDriverWait(self.driver, 10).until(
-            ec.element_to_be_clickable(show_more_button))
+            ec.element_to_be_clickable((By.CSS_SELECTOR, SubSubSubcategoryPage.SHOW_MORE_BUTTON)))
 
     def get_product_subject_checkbox(self) -> WebElement:
-        return self.driver.find_element(By.XPATH, self.CHECKBOX)
+        return self.driver.find_element(By.CSS_SELECTOR, self.CHECKBOX)
 
     def get_witch_carnival_costume(self) -> WebElement:
         return WebDriverWait(self.driver, 10).until(
-            ec.element_to_be_clickable((By.XPATH, self.WITCH_CARNIVAL_COSTUME)))
+            ec.element_to_be_clickable((By.XPATH, self.PUMPKIN_COSTUME)))
 
     def click_show_more_button(self) -> None:
         self.get_show_more_button().click()

@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -15,8 +13,10 @@ class MainPage(Base):
         self.driver = driver
 
     CATALOG_BAR: str = "//button[@data-testid='main-bar:catalog-opener']"
-    YES_BUTTON_IN_LOCATION_NOTIFICATION: str = "//button[@class='UbyyAc mnRNop UxJB_f theme-light cGKvDZ']"
+    YES_BUTTON_IN_LOCATION_NOTIFICATION: str = "//button[@data-testid='button' and contains (., 'Да, верно')]"
     PRODUCT_CATEGORIES: str = "//a[@data-testid='catalog-menu:root-category-link']"
+
+    COOKIE_ACCEPT_BANNER = ".iPD9Xn"
 
     def get_main_catalog_bar(self) -> WebElement:
         return WebDriverWait(self.driver, 10).until(
@@ -35,22 +35,28 @@ class MainPage(Base):
 
     def click_main_catalog_bar(self) -> None:
         self.get_main_catalog_bar().click()
-        print("Click CATALOG BAR")
 
     def click_yes_location_button(self) -> None:
         self.get_yes_location_button().click()
-        print("Click YES location button")
 
     def click_product_category(self) -> None:
         self.get_product_category().click()
-        print("Click PRODUCT CATEGORY")
+
+    def click_cookie_button(self):
+        cookie_button = WebDriverWait(self.driver, 5).until(
+            ec.element_to_be_clickable(
+                (By.CSS_SELECTOR, MainPage.COOKIE_ACCEPT_BANNER))
+        )
+        cookie_button.click()
 
     def select_main_catalog_bar(self) -> None:
         self.driver.get(self.url)
         self.get_current_url()
-        time.sleep(5)
+
         self.click_yes_location_button()
-        time.sleep(3)
+
         self.click_main_catalog_bar()
-        time.sleep(3)
+
+        self.click_cookie_button()
+
         self.click_product_category()

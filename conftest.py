@@ -6,6 +6,7 @@ from selenium import webdriver
 def setup_test():
     print("Start test")
     yield
+
     print("Finish test")
 
 @pytest.fixture(scope="module")
